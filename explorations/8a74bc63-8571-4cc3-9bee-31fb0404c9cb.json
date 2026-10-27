@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0",
+  "id": "8a74bc63-8571-4cc3-9bee-31fb0404c9cb",
+  "slug": "synthetic-example-why-a-cache-needs-a-size-limit",
+  "title": "Synthetic example: why a cache needs a size limit",
+  "context": "A newly scripted illustration for testing Synapse publication. This is not a real contributor conversation and contains no private submission material.",
+  "subject": "Computer science",
+  "tags": [
+    "caching",
+    "memory limits",
+    "synthetic example"
+  ],
+  "reasoning_approaches": [
+    "Tracing a mechanism"
+  ],
+  "purpose": "Understand",
+  "contributor_display_name": "Synapse synthetic example",
+  "ai_provider": "Not applicable (scripted example)",
+  "ai_model": "Not applicable",
+  "language": "English",
+  "conversation_date": null,
+  "published_at": "2026-10-27T19:34:00.000Z",
+  "messages": [
+    {
+      "id": "m1",
+      "role": "human",
+      "text": "If a cache makes lookups faster, why not let it keep everything?"
+    },
+    {
+      "id": "m2",
+      "role": "assistant",
+      "text": "A cache uses limited memory. Without a size limit, keeping more entries can consume memory needed by the rest of the application."
+    },
+    {
+      "id": "m3",
+      "role": "human",
+      "text": "So reaching the limit should remove something, rather than refuse every new item?"
+    },
+    {
+      "id": "m4",
+      "role": "assistant",
+      "text": "That is one common choice. A least recently used policy removes the entry that has gone unused for the longest time, making room for a new entry. The best policy depends on the workload."
+    }
+  ],
+  "annotations": [],
+  "reflection": "Synthetic example: a follow-up connects a performance benefit to a resource limit. No real person's thinking or experience is represented.",
+  "unresolved_questions": [
+    "Which eviction policy fits a workload with frequently repeated lookups?"
+  ],
+  "source_url": null,
+  "verification_status": "Not checked",
+  "editing_disclosure": "Entire dialogue and reflection scripted for a publication test; no original conversation was imported, paraphrased, or redacted. For rights the contributor can grant, this example is offered under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/), including commercial reuse with attribution. This does not license any rights the contributor does not own or control.",
+  "provenance_type": "illustrative",
+  "is_illustrative": true
+}
