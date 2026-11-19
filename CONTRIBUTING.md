@@ -16,45 +16,36 @@ Choose a conversation, or a connected excerpt, from an AI tool you already use.
 
 A short exchange can be useful. Depth is not a score based on length, jargon, or expertise.
 
-## Option A: paste conversation text
+## Option A: import a public shared-chat link
 
-On [Share your conversation](https://synapse.ctrlchaos.io/synapse/contribute), choose **Paste conversation text**.
+On [Share your conversation](https://synapse.ctrlchaos.io/synapse/contribute), choose **Paste a public/shared-chat link**, enter the URL and select **Preview conversation**. Both sharing options are visible from the start.
 
-- Paste only the selected messages, then use **Separate messages for review**.
-- Check message boundaries, human/assistant labels, and exact wording. Correct parser mistakes yourself.
-- Supply a title and subject. Review optional metadata, disclosure, public display name, and your own reflection. You can use a nickname or Anonymous.
-- Use **Preview public contribution** and read the entire proposed public record.
-- Read the contribution terms, including commercial reuse for rights you can grant, then explicitly confirm permission and submit for private review.
+Synapse automatically retrieves complete supported conversation text when the provider allows it. Read the actual preview, optionally edit or redact it, save changes, then confirm current publication permission and privacy before pressing **Publish**. No mandatory moderator approval or contributor GitHub account is required. No AI inference API call is needed.
 
-Your selected original and proposed public version enter a private queue. A success reference is a private submission reference, not a publication URL. No contact email is collected by this form.
-
-## Option B: submit a shared-chat link
-
-Choose **Paste a public/shared-chat link**. You do not need to paste a transcript first.
-
-Review **everything the link exposes**, not just the messages you hope to publish. Check privacy, permission, and third-party text before confirming the terms and submitting the link.
-
-The URL is saved privately **awaiting manual import and review**. Automatic importing is unavailable. A moderator must obtain and import actual messages, check them, and approve the public version. Saving the URL is not “conversation imported.” A public link alone is not republication permission.
-
-Links can expire, be revoked, or require sign-in. Use pasted text if a link is unavailable or unsuitable. Synapse makes no AI API call for basic text or link intake and offers no email-submission route.
+Review everything the original link exposes, not just the excerpt you intend to publish. The original URL and unredacted baseline stay private by default. A URL alone is never republication permission. If attachments or interactive layouts are omitted, inspect the disclosure and explicitly accept the displayed text-only version. Unsupported or uncertain content must not be treated as a complete import.
 
 ### Supported shared links
 
-| Provider | Accepted shape | Share ID rule |
+| Provider | Accepted shape | Availability |
 | --- | --- | --- |
-| ChatGPT | `https://chatgpt.com/share/<share-id>` | 36 characters made of hexadecimal digits and hyphens |
-| Claude | `https://claude.ai/share/<share-id>` | 36 characters made of hexadecimal digits and hyphens |
-| Gemini | `https://gemini.google.com/share/<share-id>` | 6 to 100 letters, digits, underscores, or hyphens |
+| ChatGPT | `https://chatgpt.com/share/<share-id>` | Automatic supported text import, including a restricted anonymous browser reader for preview-only server HTML |
+| Gemini | `https://gemini.google.com/share/<share-id>` | Automatic supported text import |
+| Gemini short links | `https://g.co/gemini/share/<share-id>` or `https://share.gemini.google/<share-id>` | Only validated redirects to the supported Gemini share page |
+| Claude | `https://claude.ai/share/<share-id>` | Accepted URL format; the verified server environment is blocked by the provider, so use copied-text recovery when it cannot be read |
 
-A trailing slash is accepted. Use HTTPS with exactly the host shown; credentials, explicit ports, fragments, and query parameters are rejected. The ChatGPT/Claude rule accepts hexadecimal letter case; do not infer from syntax validation that the link is available or genuinely public. For other providers, paste the selected text.
+ChatGPT/Claude IDs accept 36 hexadecimal/hyphen characters. Direct Gemini and g.co IDs accept 6–100 letters, digits, underscores or hyphens; share.gemini.google IDs accept 6–100 letters/digits. A trailing slash is accepted. Submitted links require HTTPS and exactly the host/path above, without credentials, explicit ports, fragments or query parameters. Accepted syntax does not establish availability, authenticity or affiliation.
 
-These are implemented intake formats, not a claim of affiliation with the providers.
+Private, blocked, deleted, unavailable or incomplete shares remain private with a clear explanation. Synapse does not ask for a provider login or solve access challenges. It never invents missing messages. Retry a transient failure or use the recovery option below.
 
-## Optional preparation prompts
+## Option B: paste or upload copied conversation text
 
-Under **Paste conversation text**, expand **Optional help: prepare a conversation with AI** on the [contribution page](https://synapse.ctrlchaos.io/synapse/contribute). It offers prompts for preparing a selected exchange, finding connected questions, or capturing a moment understanding changed. **Advanced: import a prepared JSON conversation** is optional; ordinary text remains sufficient.
+Choose **Paste or upload conversation text** in the same flow. Copy selected messages with clear speaker labels and original code fences. Paste that copy, or save it as UTF-8 `.txt`/`.md` and upload it. The limit is 1 MB and 250,000 characters. PDFs, images, provider account exports and other file formats are not supported.
 
-A prompt can work only with messages actually available in the current chat or excerpts you provide. It cannot retrieve your entire account history. Inspect the result message by message, preserve original wording, and exclude preparation instructions and their output from the exchange. Write your own reflection. Prompts do not guarantee privacy, accuracy, or suitability.
+Use **Preview conversation**, check message boundaries, human/assistant labels, wording and order, and optionally edit/redact. If boundaries are ambiguous, correct standalone Human: and Assistant: labels; do not transcribe or fabricate exchanges. Editing does not require writing JSON or entering each message individually. A title and anonymous display name are supplied by default; changing them is optional.
+
+Copied/uploaded text is contributor supplied, not independently verified against its source. Non-text material is excluded and requires explicit text-only acceptance. Read the entire preview, confirm the current terms and privacy, then press Publish. Any edit clears confirmation and requires review of the new exact version. Basic submission has no AI API dependency or email-submission route.
+
+The current form does not contain the former preparation-prompt or prepared-JSON interface. If you use an AI preparation prompt elsewhere, it can use only messages in that chat or excerpts you provide, not your entire account history. Inspect its output and exclude preparation instructions from the actual exchange.
 
 ## Privacy and consent
 
@@ -66,7 +57,7 @@ Private originals, consent, review history, rejected submissions, moderator note
 
 ## Review and publication
 
-Private submission, private approval, a public PR, manual merge, and website refresh are distinct steps. Only the approved public version may be placed in a public branch or PR. Public branches and PRs are already visible before merge. A maintainer manually merges, then refreshes the website from the archive. Submission does not guarantee acceptance or immediate publication.
+A private preview is not public. Only after you confirm current terms and privacy and press Publish does the exact saved public version enter an archive branch/PR. Public branches and PRs are already visible before merge. The application checks and automatically merges only the matching confirmed PR, then refreshes the website. Pending checks and recoverable failures reuse the same job; use Retry publication status if automatic checking pauses. There is no routine GitHub visit or separate refresh click. Existing pending submissions are not automatically published. Publication success links to the public conversation, never a private draft URL.
 
 For an unpublished withdrawal, contact the project privately with your submission reference. There is no self-service withdrawal button. For a public correction or removal, follow [reporting and removal](docs/reporting-and-removal.md); public history and external copies may remain.
 

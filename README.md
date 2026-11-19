@@ -69,20 +69,20 @@ Illustrative examples are labelled, and the browser distinguishes them from comm
 
 ```mermaid
 flowchart TD
-    A["Choose a conversation"] --> B["Submit privately"]
+    A["Choose a conversation"] --> B["Import to a private preview"]
     subgraph private_review ["Private review"]
-        B --> C["Moderator reviews"]
+        B --> C["Contributor reads, edits and confirms permission"]
     end
-    C --> D["Approved content enters a public PR"]
-    D --> E["Maintainer manually merges"]
+    C --> D["Press Publish: confirmed content enters a public PR"]
+    D --> E["Matching PR merges automatically when checks permit"]
     E --> F["Website refreshes from the archive"]
 ```
 
-Submitting does **not** immediately publish anything. A moderator checks the selected material, permission, privacy, and proposed public version first. A shared link without messages waits for manual import and review.
+Importing does **not** immediately publish anything. You read the actual conversation in a private preview, optionally edit or redact it, then explicitly confirm permission and privacy before pressing Publish. No moderator or GitHub account is required. Existing pending submissions and old permission records do not authorize automatic publication.
 
 A pull request, or PR, proposes a change to this public collection. **Public branches and PRs are already public before merge. Only content approved for public release may enter them.** Private originals, permission records, and moderator notes must stay out of the branch, diff, comments, and attachments.
 
-A maintainer manually merges approved changes. Merged records on the archive’s default branch are the source for the website’s validated public snapshot. A maintainer then refreshes that snapshot; this is a separate step, not an instant update or a per-submission website deployment. [Publication and refresh details](docs/architecture.md).
+The application merges only the matching confirmed PR when repository checks permit, then refreshes the website automatically. Merged records on the archive’s default branch are the source for the website’s validated public snapshot. Pending checks or refresh failures remain visible as pending and can be retried using the same saved job. There is no per-submission website rebuild. [Publication and refresh details](docs/architecture.md).
 
 ## Share a conversation
 
@@ -90,14 +90,14 @@ Start at **[Share your conversation](https://synapse.ctrlchaos.io/synapse/contri
 
 | Option | What happens |
 | --- | --- |
-| Paste selected conversation text | Separate messages, check speakers and wording, review the proposed public record, and confirm permission before submitting privately |
-| Paste a supported public/shared-chat link | Review everything the link exposes, then send the URL into the private queue without supplying a transcript. A moderator must manually import and review the actual messages |
+| Paste a supported public/shared-chat link | Automatically retrieve supported complete text, review the actual public preview, optionally edit/redact, confirm current permission and press Publish |
+| Paste or upload selected conversation text | Use copied text or UTF-8 `.txt`/`.md` when a link cannot be read. Check speakers, wording and text-only disclosures, then confirm and publish |
 
-Accepted shared-link hosts are **chatgpt.com**, **claude.ai**, and **gemini.google.com**, using their supported `/share/` formats. Query strings, fragments, credentials, and explicit ports are not accepted. [Exact formats and preparation steps](CONTRIBUTING.md#supported-shared-links).
+Accepted shared-link hosts are **chatgpt.com**, **claude.ai**, **gemini.google.com**, **share.gemini.google**, and **g.co**, using their supported share formats. Query strings, fragments, credentials, and explicit ports are not accepted in submitted links. [Exact formats and preparation steps](CONTRIBUTING.md#supported-shared-links).
 
-Automatic link importing is unavailable. Links may expire, be revoked, or require sign-in; saving a URL does not verify its contents. Paste selected text when a link is unsuitable. No GitHub account, AI API key, or AI API call is required for basic submissions. Synapse does not offer email submission.
+ChatGPT and Gemini import automatically when the provider supplies complete supported data. ChatGPT can use a restricted anonymous browser reader when its server response contains only a preview. Claude currently blocks server retrieval in the verified environment; use copied text there. Private, deleted, blocked or unsupported shares are not treated as imported. A link alone is never permission to publish. No GitHub account, AI API key, or AI API call is required. Synapse does not offer email submission.
 
-The text option includes **Optional help: prepare a conversation with AI**, with copyable prompts and optional JSON import. A prompt can use only the messages available in that chat or excerpts you supply, not your entire account history. Inspect every message yourself and exclude the preparation request and its output from the original exchange.
+You do not need to write JSON or enter messages individually. Copy selected messages with clear speaker labels and preserve code fences. If speaker boundaries are ambiguous, correct the labels before continuing. Inspect every message; missing exchanges are never invented. Any preparation prompt you use elsewhere can access only the current chat or excerpts you supply, not your entire account history.
 
 ## What makes a useful contribution?
 
@@ -121,7 +121,7 @@ Use [Report or request removal](https://synapse.ctrlchaos.io/synapse/report). Pu
 
 There is no self-service withdrawal control. Ask the maintainer privately about withdrawing an unpublished submission or deleting private records. Current MVP policy retains private originals, rejected submissions, consent, and review history without automatic deletion; Abe reviews requests.
 
-Published corrections or removal require a reviewed archive change, manual merge, and successful website refresh. Git history, PRs, forks, clones, downloads, and third-party copies may remain. Removal cannot guarantee erasure from the internet or revoke permissions already granted under CC BY 4.0. No removal deadline is promised. [Reporting and removal details](docs/reporting-and-removal.md).
+Published corrections require a reviewed archive update and successful website refresh. The authenticated owner can remove a record through an exact matching removal PR, automatic merge and refresh. Git history, PRs, forks, clones, downloads, and third-party copies may remain. Removal cannot guarantee erasure from the internet or revoke permissions already granted under CC BY 4.0. No removal deadline is promised. [Reporting and removal details](docs/reporting-and-removal.md).
 
 ## Authenticity and limitations
 
@@ -204,6 +204,6 @@ Do not expose unpublished conversations while helping. Raw submissions and sensi
 
 ## Project status and about
 
-**The MVP is live.** It supports private text and link intake, moderator review, approval before a public PR, manual maintainer merge, and public browsing/search after archive refresh. Shared-link import and refresh remain manual steps. There is no automatic fact-checking, authenticity guarantee, or instant-publication promise.
+**The MVP is live.** It supports automatic import of readable ChatGPT/Gemini text shares, private contributor review/editing, explicit current permission, automatic matching PR merge and website refresh, and public browsing/search/export. Moderator approval is optional. Provider blocking, unavailable shares and unsupported content can prevent automatic import; Claude currently requires copied-text recovery when blocked. There is no automatic fact-checking, authenticity guarantee, or instant-publication promise.
 
 Synapse is a **CTRL+CHAOS community project maintained by Abe**. Visit [CTRL+CHAOS](https://ctrlchaos.io/), [read the project guidelines](https://synapse.ctrlchaos.io/synapse/guidelines), or [contact the project privately](https://ctrlchaos.io/contact).
